@@ -9,6 +9,7 @@ generated/
 *.elf
 *.dis
 *.map
+!/*.uf2
 
 # CMake / Ninja / ビルドシステム
 CMakeFiles/
