@@ -9,7 +9,7 @@
 ## 構成
 
 ## 回路図・資料
-- ![Pico2ROMEmuBR_sch](./IMG/Pico2ROMEmuBR_sch.png)
+- ![Pico2ROMEmuBR_sch](./IMG/Pico2ROMEmuBR_sch.jpg)
 上記は回路図の画像です。
 
 ## ライセンス

@@ -8,7 +8,7 @@ This project is a simple and fast ROM emulator using Pico2ROMEmu with RP2350B Co
 ## Structure
 
 ## Schematics and Documents
-- ![Pico2ROMEmuBR_sch](./IMG/Pico2ROMEmuBR_sch.png)
+- ![Pico2ROMEmuBR_sch](./IMG/Pico2ROMEmuBR_sch.jpg)
   - The above is an image of the schematic.
 
 ## Disclaimer
