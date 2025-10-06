@@ -120,7 +120,8 @@ __attribute__((noinline)) int __time_critical_func(main)(void) {
     sm_config_set_set_pins(&c1, CLKOUT_PIN, 1); // GP28をクロック出力ピンとして設定
     pio_sm_set_consecutive_pindirs(pio, sm1, CLKOUT_PIN, 1, true); // CLKOUTピンの初期化
 
-    sm_config_set_clkdiv(&c1, (float)sysclk / 40000.0f); //  40MHz : 20MHz(10MHz 9600bps)
+    float clkout_freq = 20000.0f; // kHz - 20MHz (Super Aki-80 10MHz 9600bps)
+    sm_config_set_clkdiv(&c1, (float)sysclk / (2.0f * clkout_freq)); // クロック出力のクロック設定
 
      // sm2 のリセット出力を設定
     sm_config_set_set_pins(&c2, RESETOUT_PIN, 1); // GP25をリセット出力ピンとして設定
@@ -144,17 +145,17 @@ __attribute__((noinline)) int __time_critical_func(main)(void) {
     init_rom_basic_code(); // rom_basic_const.cから初期化
     sleep_ms(3000); // 3秒待機
     // [Enter]入力を待つ
-    printf("\n[Enter] を押すとPico2(RP2350B Core Board) ROMエミュレータのテスト開始します...\n");
+    printf("\n[Enter] を押すとPico2ROMEmuCB(RP2350B Core Board) ROMエミュレータのテスト開始します...\n");
     while (true) {
         int c = getchar_timeout_us(100000); // 100msタイムアウト
         if (c == '\r') { // [Enter]（CR）が入力されたら開始
-            printf("Pico2(RP2350B Core Board) ROMエミュレータのテスト開始...\n");
+            printf("Pico2ROMEmuCB(RP2350B Core Board) ROMエミュレータのテスト開始...\n");
             break;
         }
     }
-    printf("\nPico2(RP2350B Core Board) システムクロック(1.3V) - %dMHz\n", sysclk / 1000);
+    printf("\nPico2(RP2350B Core Board システムクロック(1.3V) - %dMHz\n", sysclk / 1000);
     printf("リセット出力状態 - ON\n");
-    printf("クロック出力(20MHz) Super AKI-80 10MHz:9600bps - ON\n");
+    printf("クロック出力(%dMHz) Super AKI-80 %dMHz:%dbps - ON\n", (int)(clkout_freq / 1000),(int)(clkout_freq / 2000), BAUD_RATE);
     printf("ROMエミュレータ起動 - コア1\n");
     multicore_launch_core1(core1_entry);
     uint32_t g = multicore_fifo_pop_blocking();
