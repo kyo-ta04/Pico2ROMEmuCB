@@ -11,6 +11,10 @@
 ## 回路図・資料
 - ![Pico2ROMEmuBR_sch](./IMG/Pico2ROMEmuBR_sch.jpg)
 上記は回路図の画像です。
+- ![Pico2ROMEmuBR_RUN_img](./IMG/Pico2ROMEmuCB_RUN_img.jpg)
+上記は実行例画像です。
+- WeAct StudioのRP2350B Core Boardは、Raspberry Pi RP2350Bマイクロコントローラを搭載したコンパクトな開発ボードで、サイズわずか41.4×41.1mmながら全48本のI/Oピンを2つの30ピンヘッダー引き出しています。  
+Github : [WeActStudio.RP2350BCoreBoard](https://github.com/WeActStudio/WeActStudio.RP2350BCoreBoard)
 
 ## ライセンス
 - 本プロジェクトのソースコードは MIT ライセンスです。
