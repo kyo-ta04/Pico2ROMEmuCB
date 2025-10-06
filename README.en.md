@@ -8,12 +8,17 @@ This project is a simple and fast ROM emulator using Pico2ROMEmu with RP2350B Co
 ## Structure
 
 ## Schematics and Documents
-- ![Pico2ROMEmuBR_sch](./IMG/Pico2ROMEmuBR_sch.jpg)
+- ![Pico2ROMEmuCB_sch](./IMG/Pico2ROMEmuCB_sch.jpg)
 The above is an image of the schematic.
 - ![Pico2ROMEmuBR_RUN_img](./IMG/Pico2ROMEmuCB_RUN_img.jpg)
 The above is an image of an execution example.
 - The WeAct Studio RP2350B Core Board is a compact development board equipped with the Raspberry Pi RP2350B microcontroller, measuring just 41.4×41.1mm, yet exposing all 48 I/O pins through two 30-pin headers.  
 Github : [WeActStudio.RP2350BCoreBoard](https://github.com/WeActStudio/WeActStudio.RP2350BCoreBoard)
+
+
+## License
+- The source code of this project is under the MIT license.
+- For the ROM data part, please refer to the licenses of the original site and the modified source.
 
 ## Disclaimer
 This software is provided as is. The author is not responsible for any damage.
