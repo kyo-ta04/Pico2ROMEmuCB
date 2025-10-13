@@ -1,14 +1,15 @@
 # Pico2ROMEmu - RP2350B Core Board Version
-![Pico2ROMEmu RP2350B Core Board](./IMG/Pico2ROMEmuPCB_CoreBoard_img_1.jpg)
+![Pico2ROMEmu RP2350B Core Board](./IMG/Pico2ROMEmuPCB_CoreBoard_img_2.jpg)
 This project is a simple and fast ROM emulator using Pico2ROMEmu with RP2350B Core Board.  
 [日本語のReadme](./README.md)
 ## Features
-- For more information, please see [Pico2ROMEmu](https://github.com/kyo-ta04/Pico2ROMEmuBR)
+<!-- - For more information, please see [Pico2ROMEmu](https://github.com/kyo-ta04/Pico2ROMEmuBR) -->
+- For more information, please see [Pico2ROMEmu](./)
 
 ## Structure
 
 ## Schematics and Documents
-- ![Pico2ROMEmuCB_sch](./IMG/Pico2ROMEmuCB_sch.jpg)
+- ![Pico2ROMEmuCB_sch](./IMG/Pico2ROMEmuCB_sch_2.jpg)
 The above is an image of the schematic.
 - ![Pico2ROMEmuBR_RUN_img](./IMG/Pico2ROMEmuCB_RUN_img.jpg)
 The above is an image of an execution example.
