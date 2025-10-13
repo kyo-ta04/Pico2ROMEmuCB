@@ -15,7 +15,7 @@ Github : [WeActStudio.RP2350BCoreBoard](https://github.com/WeActStudio/WeActStud
 
 
 ## 回路図・資料
-- ![Pico2ROMEmuCB_sch](./IMG/Pico2ROMEmuCB_sch.jpg)
+- ![Pico2ROMEmuCB_sch](./IMG/Pico2ROMEmuCB_sch_2.jpg)
 上記は回路図の画像です。
 - ![Pico2ROMEmuCB_RUN_img](./IMG/Pico2ROMEmuCB_RUN_img_2.jpg)
 上記は saki80mon041.hex使用時の実行例画像です。

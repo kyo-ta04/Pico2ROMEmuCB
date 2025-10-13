@@ -3,18 +3,21 @@
 This project is a simple and fast ROM emulator using Pico2ROMEmu with RP2350B Core Board.  
 [日本語のReadme](./README.md)
 ## Features
-<!-- - For more information, please see [Pico2ROMEmu](https://github.com/kyo-ta04/Pico2ROMEmuBR) -->
-- For more information, please see [Pico2ROMEmu](./)
+- For more information, please see [Pico2ROMEmu](https://github.com/kyo-ta04/Pico2ROMEmuBR)
 
 ## Structure
+- ROM data such as 'saki80mon041_const.c' comes from [saki80mon041.hex](https://github.com/yyhayami/saki80mon041).
+UNIMON for SAKI80 is based on the Universal Monitor released by asano, with significant extensions by Aki.H and EMUZ80_Monitor Rev.B04 released for the EMUZ80, and was ported by @yyhayami to run on the Super AKI-80.
+- The WeAct Studio RP2350B Core Board is a compact development board equipped with the Raspberry Pi RP2350B microcontroller, measuring just 41.4×41.1mm, yet exposing all 48 I/O pins through two 30-pin headers.  
+Github : [WeActStudio.RP2350BCoreBoard](https://github.com/WeActStudio/WeActStudio.RP2350BCoreBoard)
 
 ## Schematics and Documents
 - ![Pico2ROMEmuCB_sch](./IMG/Pico2ROMEmuCB_sch_2.jpg)
 The above is an image of the schematic.
-- ![Pico2ROMEmuBR_RUN_img](./IMG/Pico2ROMEmuCB_RUN_img.jpg)
-The above is an image of an execution example.
-- The WeAct Studio RP2350B Core Board is a compact development board equipped with the Raspberry Pi RP2350B microcontroller, measuring just 41.4×41.1mm, yet exposing all 48 I/O pins through two 30-pin headers.  
-Github : [WeActStudio.RP2350BCoreBoard](https://github.com/WeActStudio/WeActStudio.RP2350BCoreBoard)
+- ![Pico2ROMEmuBR_RUN_img_2](./IMG/Pico2ROMEmuCB_RUN_img_2.jpg)
+The above is an example image of execution when using saki80mon041.hex.
+- ![Pico2ROMEmuBR_RUN_img_1](./IMG/Pico2ROMEmuCB_RUN_img_1.jpg)
+The above is an example image of execution when using SAKI80MB.HEX.
 
 
 ## License
@@ -23,6 +26,15 @@ Github : [WeActStudio.RP2350BCoreBoard](https://github.com/WeActStudio/WeActStud
 
 ## Disclaimer
 This software is provided as is. The author is not responsible for any damage.
+
+## Acknowledgments
+- @yyhayami（[saki80mon041  creator）](https://github.com/yyhayami/saki80mon041)）
+- @electrelic(asano)（[Universal Monitor creator）](https://electrelic.com/electrelic/node/1317)）
+- @akih_san(Aki.h)（[EMUZ80-MON creator](https://github.com/akih-san/EMUZ80-MON)）
+- Thank you to everyone who gave me advice, liked my posts, and recommended my work on x.com and elsewhere.
+- Raspberry Pi Pico SDK developers
+- Everyone involved in this project
+- Please also check out [Pico2ROMEmu](https://github.com/kyo-ta04/Pico2ROMEmuBR).
 
 ---
 
