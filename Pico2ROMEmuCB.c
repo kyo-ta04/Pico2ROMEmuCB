@@ -12,7 +12,8 @@
 #include "hardware/pll.h"
 #include "pico/multicore.h"
 #include "rom_emu.pio.h"
-#include "rom_basic_const.c" 
+// #include "rom_basic_const.c" 
+#include "saki80mon041_const.c" 
 
 #define DATA_PINS_BASE 2    // GP2～GP9 (D0-D7 8bit)
 #define ADDR_PINS_BASE 10   // GP10～GP24 (A0-A14 15bit)
@@ -52,12 +53,12 @@ __attribute__((noinline)) void __time_critical_func(core1_entry)(void) {
 }
 
 
-// rom_basic[]をrom_data[]にコピーする初期化ルーチン
+// rom_saki80mon041[]をrom_data[]にコピーする初期化ルーチン
 void init_rom_basic_code(void) {
-    // z80_binary[]の内容をrom_data[]の先頭にコピー
-    memcpy(rom_data, rom_basic, sizeof(rom_basic));
-    // 残りのrom[]を0xFFで埋める（8Kバイトまで）
-    memset(rom_data + sizeof(rom_basic), 0xFF, ROM_SIZE - sizeof(rom_basic));
+    // rom_saki80mon041[]の内容をrom_data[]の先頭にコピー
+    memcpy(rom_data, rom_saki80mon041, sizeof(rom_saki80mon041));
+    // 残りのrom_data[]を0xFFで埋める（32Kバイトまで）
+    memset(rom_data + sizeof(rom_saki80mon041), 0xFF, ROM_SIZE - sizeof(rom_saki80mon041));
 }
 
 
@@ -153,11 +154,11 @@ __attribute__((noinline)) int __time_critical_func(main)(void) {
     while (true) {
         int c = getchar_timeout_us(100000); // 100msタイムアウト
         if (c == '\r') { // [Enter]（CR）が入力されたら開始
-            printf("Pico2ROMEmuCB(RP2350B Core Board) ROMエミュレータのテスト開始...\n");
+            printf("Pico2ROMEmuCB(RP2350B Core Board) ROMエミュレータ v0.2 32KB のテスト開始...\n");
             break;
         }
     }
-    printf("\nPico2(RP2350B Core Board システムクロック(1.3V) - %dMHz\n", sysclk / 1000);
+    printf("\nPico2(RP2350B Core Board) システムクロック(1.3V) - %dMHz\n", sysclk / 1000);
     printf("リセット出力状態 - ON\n");
     printf("クロック出力(%dMHz) Super AKI-80 %dMHz:%dbps - ON\n", (int)(clkout_freq / 1000),(int)(clkout_freq / 2000), BAUD_RATE);
     printf("ROMエミュレータ起動 - コア1\n");
