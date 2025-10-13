@@ -1,3 +1,7 @@
+//
+// Pico2ROMEmuCB.c - Pico2ROMEmuCB(RP2350B Core Board) 用 ROMエミュレータ
+// 2024/06/15 by @DragonballEZ(kyo-ta04)
+//
 #include <stdio.h>
 #include <string.h>
 #include "pico/stdlib.h"
@@ -11,7 +15,7 @@
 #include "rom_basic_const.c" 
 
 #define DATA_PINS_BASE 2    // GP2～GP9 (D0-D7 8bit)
-#define ADDR_PINS_BASE 10   // GP10～GP22 (A0-A12 13bit)
+#define ADDR_PINS_BASE 10   // GP10～GP24 (A0-A14 15bit)
 #define RESETOUT_PIN 25     // GP25 (リセット出力)
 
 #define OE_PIN 26           // GP26 Output Enable (OE#)
@@ -26,7 +30,7 @@
 
 #define FLAG_VALUE 123
 
-#define ROM_SIZE 8192
+#define ROM_SIZE 32768 // 32Kバイト (15bitアドレス)
 
 // PIO初期化
 PIO pio = pio0;
@@ -91,12 +95,12 @@ __attribute__((noinline)) int __time_critical_func(main)(void) {
     uint offset2 = pio_add_program(pio, &reset_out_program);
     pio_sm_config c2 = reset_out_program_get_default_config(offset2);
 
-    // GP0-7：出力
+    // GP2-9：出力
     for (int i = 0; i < 8; i++) {
         pio_gpio_init(pio, DATA_PINS_BASE + i);
     }
-    // GP8-22：入力(13ピン A0-A12)
-    for (int i = 0; i < 13; i++) {
+    // GP10-24：入力(15ピン A0-A14)
+    for (int i = 0; i < 15; i++) {
         pio_gpio_init(pio, ADDR_PINS_BASE + i);
     }
     
