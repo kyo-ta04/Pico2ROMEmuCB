@@ -15,19 +15,19 @@
 // #include "rom_basic_const.c" 
 #include "saki80mon041_const.c" 
 
-#define DATA_PINS_BASE 2    // GP2～GP9 (D0-D7 8bit)
-#define ADDR_PINS_BASE 10   // GP10～GP24 (A0-A14 15bit)
+#define DATA_PINS_BASE 0    // GP0～GP7 (D0-D7 8bit)
+#define ADDR_PINS_BASE 8    // GP8～GP22 (A0-A14 15bit)
+#define CS_PIN 23           // GP23 Chip Select (CS#:A15)
+#define OE_PIN 24           // GP24 Output Enable (OE#)
 #define RESETOUT_PIN 25     // GP25 (リセット出力)
 
-#define OE_PIN 26           // GP26 Output Enable (OE#)
-#define CS_PIN 27           // GP27 Chip Select (CS#)
-#define CLKOUT_PIN 28       // GP28 (クロック出力)
+#define CLKOUT_PIN 26       // GP26 (クロック出力)
 
 // UART0の設定
 #define UART_ID uart0
+#define UART_TX_PIN 28
+#define UART_RX_PIN 29
 #define BAUD_RATE 9600
-#define UART_TX_PIN 0
-#define UART_RX_PIN 1
 
 #define FLAG_VALUE 123
 
@@ -96,23 +96,23 @@ __attribute__((noinline)) int __time_critical_func(main)(void) {
     uint offset2 = pio_add_program(pio, &reset_out_program);
     pio_sm_config c2 = reset_out_program_get_default_config(offset2);
 
-    // GP2-9：出力
+    // GP0-7：出力
     for (int i = 0; i < 8; i++) {
         pio_gpio_init(pio, DATA_PINS_BASE + i);
     }
-    // GP10-24：入力(15ピン A0-A14)
+    // GP8-22：入力(15ピン A0-A14)
     for (int i = 0; i < 15; i++) {
         pio_gpio_init(pio, ADDR_PINS_BASE + i);
     }
     
     pio_gpio_init(pio, RESETOUT_PIN); // リセット出力ピン(GP25)の初期化
-    pio_gpio_init(pio, OE_PIN); // OEピン(GP26)の初期化
-    pio_gpio_init(pio, CS_PIN); // CSピン(GP27)の初期化
-    pio_gpio_init(pio, CLKOUT_PIN); // CLK出力ピン(GP28)の初期化
+    pio_gpio_init(pio, OE_PIN); // OEピン(GP24)の初期化
+    pio_gpio_init(pio, CS_PIN); // CSピン(GP23)の初期化
+    pio_gpio_init(pio, CLKOUT_PIN); // CLK出力ピン(GP26)の初期化
 
     sm_config_set_in_pins(&c, ADDR_PINS_BASE);
     sm_config_set_out_pins(&c, DATA_PINS_BASE, 8);
-    sm_config_set_jmp_pin(&c, OE_PIN); // GPIO26 OEをJMPピンとして設定
+    sm_config_set_jmp_pin(&c, OE_PIN); // GPIO24 OEをJMPピンとして設定
     
 
     pio_sm_set_consecutive_pindirs(pio, sm, DATA_PINS_BASE, 8, false); // 出力ピン初期化
@@ -122,7 +122,7 @@ __attribute__((noinline)) int __time_critical_func(main)(void) {
     sm_config_set_out_shift(&c, true, false, 0); // OSR（出力シフトレジスタ）のシフト方向
 
     // sm1 のクロック出力を設定 
-    sm_config_set_set_pins(&c1, CLKOUT_PIN, 1); // GP28をクロック出力ピンとして設定
+    sm_config_set_set_pins(&c1, CLKOUT_PIN, 1); // GP26をクロック出力ピンとして設定
     pio_sm_set_consecutive_pindirs(pio, sm1, CLKOUT_PIN, 1, true); // CLKOUTピンの初期化
 
     float clkout_freq = 20000.0f; // kHz - 20MHz (Super Aki-80 10MHz 9600bps)
