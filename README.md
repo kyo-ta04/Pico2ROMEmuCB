@@ -1,6 +1,6 @@
 # Pico2ROMEmu - RP2350B Core Board Version
 <!-- ![Pico2ROMEmu RP2350B Core Board](./IMG/Pico2ROMEmuPCB_CoreBoard_img_1.jpg) -->
-![Pico2ROMEmu RP2350B Core Board](./IMG/Pico2ROMEmuPCB_CoreBoard_img_2.jpg)
+![Pico2ROMEmu RP2350B Core Board](./IMG/Pico2ROMEmuPCB_CoreBoard_img_3.jpg)
 このプロジェクトは Pico2ROMEmuに RP2350B Core Boardを使用した簡単で高速なROMエミュレータです  
 [English Readme](./README.en.md)
 
@@ -15,7 +15,7 @@ Github : [WeActStudio.RP2350BCoreBoard](https://github.com/WeActStudio/WeActStud
 
 
 ## 回路図・資料
-- ![Pico2ROMEmuCB_sch](./IMG/Pico2ROMEmuCB_sch_2.jpg)
+- ![Pico2ROMEmuCB_sch](./IMG/Pico2ROMEmuCB_sch_3.jpg)
 上記は回路図の画像です。
 - ![Pico2ROMEmuCB_RUN_img](./IMG/Pico2ROMEmuCB_RUN_img_2.jpg)
 上記は saki80mon041.hex使用時の実行例画像です。

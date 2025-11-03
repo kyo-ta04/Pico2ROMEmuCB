@@ -1,5 +1,5 @@
 # Pico2ROMEmu - RP2350B Core Board Version
-![Pico2ROMEmu RP2350B Core Board](./IMG/Pico2ROMEmuPCB_CoreBoard_img_2.jpg)
+![Pico2ROMEmu RP2350B Core Board](./IMG/Pico2ROMEmuPCB_CoreBoard_img_3.jpg)
 This project is a simple and fast ROM emulator using Pico2ROMEmu with RP2350B Core Board.  
 [日本語のReadme](./README.md)
 ## Features
@@ -12,7 +12,7 @@ UNIMON for SAKI80 is based on the Universal Monitor released by asano, with sign
 Github : [WeActStudio.RP2350BCoreBoard](https://github.com/WeActStudio/WeActStudio.RP2350BCoreBoard)
 
 ## Schematics and Documents
-- ![Pico2ROMEmuCB_sch](./IMG/Pico2ROMEmuCB_sch_2.jpg)
+- ![Pico2ROMEmuCB_sch](./IMG/Pico2ROMEmuCB_sch_3.jpg)
 The above is an image of the schematic.
 - ![Pico2ROMEmuBR_RUN_img_2](./IMG/Pico2ROMEmuCB_RUN_img_2.jpg)
 The above is an example image of execution when using saki80mon041.hex.
