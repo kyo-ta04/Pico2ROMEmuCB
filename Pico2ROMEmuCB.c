@@ -93,9 +93,10 @@ __attribute__((noinline)) int __time_critical_func(main)(void) {
     pio_sm_config c1 = clk_out_program_get_default_config(offset1);
  
     uint sm2 = 2; // sm2を使用
+    // sm2 のリセット出力プログラムをロード
     uint offset2 = pio_add_program(pio, &reset_out_program);
-    pio_sm_config c2 = reset_out_program_get_default_config(offset2);
-
+//    pio_sm_config c2 = reset_out_program_get_default_config(offset2);
+ 
     // GP0-7：出力
     for (int i = 0; i < 8; i++) {
         pio_gpio_init(pio, DATA_PINS_BASE + i);
@@ -129,13 +130,14 @@ __attribute__((noinline)) int __time_critical_func(main)(void) {
     sm_config_set_clkdiv(&c1, (float)sysclk / (2.0f * clkout_freq)); // クロック出力のクロック設定
 
      // sm2 のリセット出力を設定
-    sm_config_set_set_pins(&c2, RESETOUT_PIN, 1); // GP25をリセット出力ピンとして設定
-    pio_sm_set_consecutive_pindirs(pio, sm2, RESETOUT_PIN, 1, true); // リセット出力ピンの初期化 
+// Set initial pin direction to INPUT (false) for Hi-Z state at startup.
+//    pio_sm_set_consecutive_pindirs(pio, sm2, RESETOUT_PIN, 1, true); // リセット出力ピンの初期化 
+    pio_sm_set_consecutive_pindirs(pio, sm2, RESETOUT_PIN, 1, false); // リセット出力ピンの初期化(Hi-z:入力に設定) 
+    pio_sm_config c2 = reset_out_program_get_default_config(offset2);
+    sm_config_set_set_pins(&c2, RESETOUT_PIN, 1); // GP25をリセット出力ピンとして設定 ??????
     sm_config_set_clkdiv(&c2, sysclk / 10); //  10kHz (リセット出力のクロック)
-    
-    // sm2 のリセット出力プログラムをロード
     pio_sm_init(pio, sm2, offset2, &c2);
-    pio_sm_set_pins(pio, sm2, 1); // ピン値を1（Hi）に設定（set_pinsのベースからのビット値）
+//    pio_sm_set_pins(pio, sm2, 1); // ピン値を1（Hi）に設定（set_pinsのベースからのビット値）
     pio_sm_set_enabled(pio, sm2, true);
 
     // sm のROMエミュプログラムをロード
@@ -172,8 +174,17 @@ __attribute__((noinline)) int __time_critical_func(main)(void) {
     }
 
     uint32_t tim = 1000; 
-    printf("リセット解除まで - %d ms\n", tim);  
-    pio_sm_put(pio, sm2, tim);
+//    while (true) {
+        printf("リセット解除まで - %d ms\n", tim);
+ //       getchar(); // キー入力待ち  
+ //       printf("\n");
+        pio_sm_put(pio, sm2, tim);
+
+//        printf("hit any key\n");
+//        getchar(); // キー入力待ち  
+//        printf("\n");
+//        pio_sm_put(pio, sm2, 0);
+//    }
 
     // メインループ
     printf("UART-USBブリッジ動作開始...\n");
