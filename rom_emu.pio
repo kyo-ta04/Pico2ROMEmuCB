@@ -19,18 +19,6 @@ loop1:
     set pins, 0   ; Turn off
 .wrap
 
-;.program reset_out          ; リセット 指定時間(ms)High出力 (GP25)
-;    set pins, 1
-;.wrap_target
-;    pull
-;    mov x,osr
-;    set pins, 1             ; Reset ON (Turn High)
-;loop:
-;    nop [1]
-;    jmp x-- loop [7]
-;    set pins, 0             ; Reset OFF (Turn Low)
-;.wrap
-
 .program reset_out          ; リセット 指定時間(ms)High出力 (GP25)
     ; --- ON: Output LOW ---
     set pindirs, 1  ; Set pin direction to output
@@ -44,7 +32,6 @@ loop1:
 lp1:
     nop [1]
     jmp x-- lp1 [7]    ; Delay
-;    pull block
     ; --- OFF: Input (Hi-Z) ---
     set pindirs, 0  ; Set pin direction to input
 .wrap
