@@ -1,6 +1,6 @@
 # Pico2ROMEmu - RP2350B Core Board Version
 <!-- ![Pico2ROMEmu RP2350B Core Board](./IMG/Pico2ROMEmuPCB_CoreBoard_img_1.jpg) -->
-![Pico2ROMEmu RP2350B Core Board](./IMG/Pico2ROMEmuPCB_CoreBoard_img_3.jpg)
+![Pico2ROMEmu RP2350B Core Board](./IMG/Pico2ROMEmuPCB_CoreBoard_img_4.jpg)
 このプロジェクトは Pico2ROMEmuに RP2350B Core Boardを使用した簡単で高速なROMエミュレータです  
 [English Readme](./README.en.md)
 
