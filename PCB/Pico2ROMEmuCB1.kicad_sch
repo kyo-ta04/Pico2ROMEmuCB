@@ -6,7 +6,7 @@
 	(paper "A5" portrait)
 	(title_block
 		(title "Pico2RomEmuCB Ver1.0 (RP2350B Core Board)")
-		(date "2025-10-13")
+		(date "2025-11-10")
 		(rev "0.1")
 	)
 	(lib_symbols
@@ -3987,7 +3987,7 @@
 		(uuid "997c3b32-f80a-40b8-bc6c-5f75559bd21a")
 	)
 	(label "OE#"
-		(at 67.31 121.92 180)
+		(at 64.77 121.92 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4175,6 +4175,16 @@
 			(justify left bottom)
 		)
 		(uuid "c76385ee-86ae-4319-8328-699401511f71")
+	)
+	(label "GPIO24"
+		(at 67.31 121.92 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c8998f6c-f009-46f5-8407-8b1aea0edf63")
 	)
 	(label "D2"
 		(at 39.37 137.16 0)
