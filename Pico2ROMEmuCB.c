@@ -17,7 +17,7 @@
 
 #define DATA_PINS_BASE 0    // GP0～GP7 (D0-D7 8bit)
 #define ADDR_PINS_BASE 8    // GP8～GP22 (A0-A14 15bit)
-#define CS_PIN 23           // GP23 Chip Select (CS#:A15)
+#define CS_PIN 23           // GP23 Chip Select (CE#:A15)
 #define OE_PIN 24           // GP24 Output Enable (OE#)
 #define RESETOUT_PIN 25     // GP25 (リセット出力)
 
@@ -84,18 +84,16 @@ __attribute__((noinline)) int __time_critical_func(main)(void) {
     gpio_set_function(UART_TX_PIN, GPIO_FUNC_UART);
     gpio_set_function(UART_RX_PIN, GPIO_FUNC_UART);
 
-    // PIO初期化
+    // PIO初期化 smにROMエミュプログラムをロード
     uint offset = pio_add_program(pio, &oe_address_control_program);
     pio_sm_config c = oe_address_control_program_get_default_config(offset);
 
-    uint sm1 = 1; // sm1を使用
+    uint sm1 = 1; // sm1にクロック出力プログラムをロード
     uint offset1 = pio_add_program(pio, &clk_out_program);
     pio_sm_config c1 = clk_out_program_get_default_config(offset1);
  
-    uint sm2 = 2; // sm2を使用
-    // sm2 のリセット出力プログラムをロード
+    uint sm2 = 2; // sm2にリセット出力プログラムをロード
     uint offset2 = pio_add_program(pio, &reset_out_program);
-//    pio_sm_config c2 = reset_out_program_get_default_config(offset2);
  
     // GP0-7：出力
     for (int i = 0; i < 8; i++) {
@@ -108,7 +106,7 @@ __attribute__((noinline)) int __time_critical_func(main)(void) {
     
     pio_gpio_init(pio, RESETOUT_PIN); // リセット出力ピン(GP25)の初期化
     pio_gpio_init(pio, OE_PIN); // OEピン(GP24)の初期化
-    pio_gpio_init(pio, CS_PIN); // CSピン(GP23)の初期化
+    pio_gpio_init(pio, CS_PIN); // CEピン(GP23)の初期化
     pio_gpio_init(pio, CLKOUT_PIN); // CLK出力ピン(GP26)の初期化
 
     sm_config_set_in_pins(&c, ADDR_PINS_BASE);
@@ -116,38 +114,40 @@ __attribute__((noinline)) int __time_critical_func(main)(void) {
     sm_config_set_jmp_pin(&c, OE_PIN); // GPIO24 OEをJMPピンとして設定
     
 
-    pio_sm_set_consecutive_pindirs(pio, sm, DATA_PINS_BASE, 8, false); // 出力ピン初期化
+    pio_sm_set_consecutive_pindirs(pio, sm, DATA_PINS_BASE, 8, false); // データ出力ピン初期化
 
     // シフトレジスタの設定
     sm_config_set_in_shift(&c, false, false, 0); // ISR（入力シフトレジスタ）のシフト方向
     sm_config_set_out_shift(&c, true, false, 0); // OSR（出力シフトレジスタ）のシフト方向
 
-    // sm1 のクロック出力を設定 
+    // sm1 のクロック出力ピンを設定 
     sm_config_set_set_pins(&c1, CLKOUT_PIN, 1); // GP26をクロック出力ピンとして設定
     pio_sm_set_consecutive_pindirs(pio, sm1, CLKOUT_PIN, 1, true); // CLKOUTピンの初期化
 
     float clkout_freq = 20000.0f; // kHz - 20MHz (Super Aki-80 10MHz 9600bps)
-    sm_config_set_clkdiv(&c1, (float)sysclk / (2.0f * clkout_freq)); // クロック出力のクロック設定
+    sm_config_set_clkdiv(&c1, (float)sysclk / (2.0f * clkout_freq)); // クロック出力用のSM動作クロック分周設定
 
-     // sm2 のリセット出力を設定
+    // sm2 のリセット出力設定（疑似オープンドレイン出力）
     // Set initial pin direction to INPUT (false) for Hi-Z state at startup.
-    pio_sm_set_consecutive_pindirs(pio, sm2, RESETOUT_PIN, 1, false); // リセット出力ピンの初期化(Hi-z:入力に設定) 
+    pio_sm_set_consecutive_pindirs(pio, sm2, RESETOUT_PIN, 1, false); // リセット出力ピンをHi-Zに初期化(入力に設定) 
     pio_sm_config c2 = reset_out_program_get_default_config(offset2);
     sm_config_set_set_pins(&c2, RESETOUT_PIN, 1); // GP25をリセット出力ピンとして設定 ??????
-    sm_config_set_clkdiv(&c2, sysclk / 10); //  10kHz (リセット出力のクロック)
+    sm_config_set_clkdiv(&c2, sysclk / 10); //  10kHz (リセット出力用SMの動作クロック分周設定)
+ 
+    // sm2 のリセット出力(疑似オープンドレイン)プログラムを初期化
     pio_sm_init(pio, sm2, offset2, &c2);
     pio_sm_set_enabled(pio, sm2, true);
 
-    // sm のROMエミュプログラムをロード
+    // sm のROMエミュプログラムを初期化
     pio_sm_init(pio, sm, offset, &c);
     pio_sm_set_enabled(pio, sm, true);
 
     sleep_ms(1); // 1ms待機
 
-    // sm1 のクロック出力プログラムをロード
+    // sm1 のクロック出力プログラムを初期化
     pio_sm_init(pio, sm1, offset1, &c1);
     pio_sm_set_enabled(pio, sm1, true);
-    init_rom_basic_code(); // rom_basic_const.cから初期化
+    init_rom_basic_code(); // ROMデータを初期化
     sleep_ms(3000); // 3秒待機
     // [Enter]入力を待つ
     printf("\n[Enter] を押すとPico2ROMEmuCB(RP2350B Core Board) ROMエミュレータのテスト開始します...\n");
