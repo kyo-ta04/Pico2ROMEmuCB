@@ -12,7 +12,9 @@ UNIMON for SAKI80 is based on the Universal Monitor released by asano, with sign
 Github : [WeActStudio.RP2350BCoreBoard](https://github.com/WeActStudio/WeActStudio.RP2350BCoreBoard)
 
 ## Schematics and Documents
-- ![Pico2ROMEmuCB_sch](./IMG/Pico2ROMEmuCB_sch_3.jpg)
+- ![Pico2ROMEmuCB_sch](./IMG/Pico2ROMEmuCB-PINOUT.jpg)
+The above is an image of the PINOUT.
+- ![Pico2ROMEmuCB_sch](./IMG/Pico2ROMEmuCB_sch_4.jpg)
 The above is an image of the schematic.
 - ![Pico2ROMEmuBR_RUN_img_2](./IMG/Pico2ROMEmuCB_RUN_img_2.jpg)
 The above is an example image of execution when using saki80mon041.hex.
@@ -35,27 +37,3 @@ This software is provided as is. The author is not responsible for any damage.
 - Raspberry Pi Pico SDK developers
 - Everyone involved in this project
 - Please also check out [Pico2ROMEmu](https://github.com/kyo-ta04/Pico2ROMEmuBR).
-
----
-
-MIT License
-
-Copyright (c) 2025 kyo-ta04(DragonballEZ)
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.

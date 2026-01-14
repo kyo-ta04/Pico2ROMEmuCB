@@ -12,7 +12,8 @@
 #include "hardware/pll.h"
 #include "pico/multicore.h"
 #include "rom_emu.pio.h"
-// #include "rom_basic_const.c" 
+
+#include "rom_basic_const.c" 
 #include "saki80mon041_const.c" 
 
 #define DATA_PINS_BASE 0    // GP0～GP7 (D0-D7 8bit)
@@ -53,12 +54,13 @@ __attribute__((noinline)) void __time_critical_func(core1_entry)(void) {
 }
 
 
-// rom_saki80mon041[]をrom_data[]にコピーする初期化ルーチン
-void init_rom_basic_code(void) {
-    // rom_saki80mon041[]の内容をrom_data[]の先頭にコピー
-    memcpy(rom_data, rom_saki80mon041, sizeof(rom_saki80mon041));
-    // 残りのrom_data[]を0xFFで埋める（32Kバイトまで）
-    memset(rom_data + sizeof(rom_saki80mon041), 0xFF, ROM_SIZE - sizeof(rom_saki80mon041));
+// rom_src[]をrom_data[]にコピーする初期化ルーチン
+// void init_rom_code(const unsigned char rom_src[], size_t src_size) {
+void init_rom_code(const unsigned char rom_src[], size_t src_size) {
+    // rom_src[]の内容をrom_data[]の先頭にコピー
+    memcpy(rom_data, rom_src, src_size);
+//   // 残りのrom_data[]を0xFFで埋める（32Kバイトまで）
+    memset(rom_data + src_size, 0xFF, ROM_SIZE - src_size);
 }
 
 
@@ -147,7 +149,8 @@ __attribute__((noinline)) int __time_critical_func(main)(void) {
     // sm1 のクロック出力プログラムを初期化
     pio_sm_init(pio, sm1, offset1, &c1);
     pio_sm_set_enabled(pio, sm1, true);
-    init_rom_basic_code(); // ROMデータを初期化
+    init_rom_code(rom_basic, sizeof(rom_basic)); // ROMデータを初期化
+//    init_rom_code(rom_saki80mon041, sizeof(rom_saki80mon041)); // ROMデータを初期化
     sleep_ms(3000); // 3秒待機
     // [Enter]入力を待つ
     printf("\n[Enter] を押すとPico2ROMEmuCB(RP2350B Core Board) ROMエミュレータのテスト開始します...\n");

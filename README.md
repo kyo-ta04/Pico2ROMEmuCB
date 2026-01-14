@@ -21,6 +21,8 @@ UNIMON for SAKI80は、asano氏が公開されているUniversal Monitorをベ�
 Github : [WeActStudio.RP2350BCoreBoard](https://github.com/WeActStudio/WeActStudio.RP2350BCoreBoard)
 
 ## 回路図・資料
+- ![Pico2ROMEmuCB-PINOUT](./IMG/Pico2ROMEmuCB-PINOUT.jpg)
+上記はピン配置の画像です。
 - ![Pico2ROMEmuCB_sch](./IMG/Pico2ROMEmuCB_sch_4.jpg)
 上記は回路図の画像です。
 - ![Pico2ROMEmuCB_RUN_img](./IMG/Pico2ROMEmuCB_RUN_img_2.jpg)
